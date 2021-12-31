@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hvor sitter du?</title>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+    <meta name="description" content="En web-app for å sende hvor du sitter til dine venner. Enkelt velg hvor du sitter og del med andre via Telegram, WhatsApp eller SMS.">
+
+    <!-- CSS import -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+      .map .pin {
+        transition: none;
+      }
+
+      .map {
+        margin-top: 1rem;
+        padding: 0 10%;
+      }
+
+      .logo {
+        max-height: 3rem;
+        margin-top: 1rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <img class="logo active" src="images/hvorsitterdu_logo.svg" alt="Hvorsitterdu logo. BILDE.">
+      <div class="map" id="touchzone">
+        <div class="pin" id="pin"><img src="images/pin.svg" alt=""></div>
+        <img class="salen" id="seatings" src="images/salen.png">
+      </div>
+    </div>
+    
+    <script type="text/javascript" src="js/main.js"></script>
+  </body>
+</html>

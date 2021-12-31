@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head lang="no">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-53485532-3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-53485532-3');
+    </script>
+
+    <meta charset="utf-8">
+    <title>Hvor sitter du?</title>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+    <meta name="description" content="En web-app for å sende hvor du sitter til dine venner. Enkelt velg hvor du sitter og del med andre.">
+
+    <!-- CSS import -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- OGp -->
+    <meta property="og:description" content="En web-app for å sende hvor du sitter til dine venner. Enkelt velg hvor du sitter og del med andre.">
+    <meta property="og:title" content="Hvor sitter du?">
+    <meta property="og:url" content="https://www.hvor.app">
+
+    <!-- iOS home screen -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="white">
+    <link rel="apple-touch-icon" href="images/touch-icon.png">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="images/favicon/favicon.ico">
+  </head>
+
+  <body>
+    <div class="container">
+      <header class="header">
+        <img class="logo active" id="logo" src="images/hvorsitterdu_logo.svg" alt="Hvorsitterdu logo. BILDE.">
+      </header>
+
+      <div class="map" id="touchzone">
+        <div class="loupe hidden" id="loupe">
+          <div class="dot" id="dot"></div>
+        </div>
+        <div class="pin" id="pin">
+          <img draggable="false" src="images/pin.svg" alt="Pin">
+        </div>
+        <img draggable="false" class="salen" id="seatings" src="images/salen.png" alt="Salen">
+      </div>
+
+      <div class="links hidden" id="links">
+        <a class="link telegram" id="telegramlink" onclick="gtag('event', 'share', { method : 'Telegram'});" href="https://t.me/share/url?url=http://www.hvorsitterdu.no/">
+          <span>Del via Telegram</span>
+          <img src="images/icons/telegram.png" alt="Telegram link. BILDE.">
+        </a>
+        <a class="link whatsapp" id="whatsapplink" onclick="gtag('event', 'share', { method: 'WhatsApp'});" data-action="share/whatsapp/share" href="whatsapp://send?text=http://www.hvorsitterdu.no/">
+          <span>Del via WhatsApp</span>
+          <img src="images/icons/whatsapp.png" alt="WhatsApp link. BILDE.">
+        </a>
+        <!-- <a class="link message" id="messagelink" onclick="gtag('event', 'share', { method: 'SMS'});" href="sms:?&body=http://www.hvorsitterdu.no/">
+          <img src="images/sms.png" alt="SMS link. BILDE.">
+        </a> -->
+      </div>
+    </div>
+    
+    <script type="text/javascript" src="js/main.js"></script>
+  </body>
+</html>
