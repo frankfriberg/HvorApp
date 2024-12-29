@@ -5,6 +5,8 @@ import { useRef, useState } from "react";
 import pinIcon from "../../../public/pin.svg";
 import map from "../../../public/salen.png";
 import { cn } from "@/lib/utils";
+import ShareMenu from "./share";
+import { NextURL } from "next/dist/server/web/next-url";
 
 type Position = {
   x: number;
@@ -26,7 +28,7 @@ function getRelativePosition(x: number, y: number, current: HTMLDivElement) {
 export default function Map() {
   const [isMoving, setIsMoving] = useState(false);
   const [current, setCurrent] = useState<Position | undefined>();
-  const [end, setEnd] = useState<Position | undefined>();
+  const [url, setUrl] = useState<NextURL | undefined>();
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -40,7 +42,7 @@ export default function Map() {
     );
 
     setIsMoving(false);
-    setEnd({ x: clampedX, y: clampedY });
+    setUrl(new NextURL(`localhost:3000/salen/${clampedX}${clampedY}`));
   }
 
   function onMove(x: number, y: number) {
@@ -52,11 +54,12 @@ export default function Map() {
       containerRef.current,
     );
 
+    setUrl(undefined);
     setCurrent({ x: clampedX, y: clampedY });
   }
 
   return (
-    <div className="px-10 touch-none select-none">
+    <div className="px-10 touch-none select-none overflow-hidden">
       <div
         ref={containerRef}
         className="w-full relative"
@@ -102,6 +105,7 @@ export default function Map() {
           className="pointer-events-none select-none touch-none"
         />
       </div>
+      <ShareMenu url={url} />
     </div>
   );
 }
