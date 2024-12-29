@@ -1,4 +1,5 @@
 import { Menu } from "@/components/home/menu";
+import Map from "@/components/map/map";
 
 export default function Home() {
   return (
@@ -7,6 +8,7 @@ export default function Home() {
         Logo
         <Menu />
       </div>
+      <Map />
     </div>
   );
 }
