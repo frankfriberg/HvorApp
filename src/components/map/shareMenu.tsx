@@ -17,10 +17,12 @@ export default function ShareMenu({ url }: ShareMenuProps) {
         url && "right-[10vw]",
       )}
       onClick={() =>
-        navigator.share({
-          title: "Test",
-          url: url?.href,
-        })
+        navigator
+          .share({
+            title: "Her sitter jeg!",
+            url: url?.href,
+          })
+          .catch(() => null)
       }
     >
       <ShareIcon className="!size-7" />
