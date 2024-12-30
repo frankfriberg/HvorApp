@@ -12,23 +12,30 @@ type Position = {
   y: number;
 };
 
-const offsetY = 60;
-
-function getRelativePosition(x: number, y: number, current: HTMLDivElement) {
+function getRelativePosition(
+  x: number,
+  y: number,
+  current: HTMLDivElement,
+  offsetY?: number,
+) {
   const { left, top, width, height } = current.getBoundingClientRect();
 
   // Clamp x and y to the div boundaries
   const clampedX = Math.min(Math.max(x - left, 0), width);
-  const clampedY = Math.min(Math.max(y - offsetY - top, 0), height);
+  const clampedY = Math.min(
+    Math.max(offsetY ? y - offsetY - top : y - top, 0),
+    height,
+  );
 
   return { clampedX, clampedY };
 }
 
 type Props = {
+  offsetY?: number;
   setUrl?: (url: NextURL | undefined) => void;
 };
 
-export default function Map({ setUrl }: Props) {
+export default function Map({ setUrl, offsetY = 60 }: Props) {
   const [isMoving, setIsMoving] = useState(false);
   const [current, setCurrent] = useState<Position | undefined>();
 
@@ -41,6 +48,7 @@ export default function Map({ setUrl }: Props) {
       x,
       y,
       containerRef.current,
+      offsetY,
     );
 
     setIsMoving(false);
@@ -57,6 +65,7 @@ export default function Map({ setUrl }: Props) {
       x,
       y,
       containerRef.current,
+      offsetY,
     );
 
     setCurrent({ x: clampedX, y: clampedY });
@@ -105,6 +114,7 @@ export default function Map({ setUrl }: Props) {
         />
       </div>
       <Image
+        priority
         src={map}
         alt=""
         width={868}
