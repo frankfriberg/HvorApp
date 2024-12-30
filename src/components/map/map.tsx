@@ -6,6 +6,7 @@ import pinIcon from "../../../public/pin.svg";
 import map from "../../../public/salen.png";
 import { cn } from "@/lib/utils";
 import { NextURL } from "next/dist/server/web/next-url";
+import { usePathname, useRouter } from "next/navigation";
 
 type Position = {
   x: number;
@@ -16,20 +17,25 @@ function getRelativePosition(
   x: number,
   y: number,
   current: HTMLDivElement,
+  gridSize: number,
   offsetY?: number,
 ) {
   const { left, top, width, height } = current.getBoundingClientRect();
 
+  // Calculate relative x and y
+  const relativeX = x - left;
+  const relativeY = offsetY ? y - offsetY - top : y - top;
+
   // Clamp x and y to the div boundaries
-  const clampedX = Math.min(Math.max(x - left, 0), width);
-  const clampedY = Math.min(
-    Math.max(offsetY ? y - offsetY - top : y - top, 0),
-    height,
-  );
+  const clampedX = Math.min(Math.max(relativeX, 0), width);
+  const clampedY = Math.min(Math.max(relativeY, 0), height);
 
-  return { clampedX, clampedY };
+  // Calculate grid indicies
+  const snappedX = Math.floor(clampedX / gridSize);
+  const snappedY = Math.floor(clampedY / gridSize);
+
+  return { clampedX, clampedY, snappedX, snappedY };
 }
-
 type Props = {
   offsetY?: number;
   setUrl?: (url: NextURL | undefined) => void;
@@ -44,17 +50,22 @@ export default function Map({ setUrl, offsetY = 60 }: Props) {
   function onEnd(x: number, y: number) {
     if (!containerRef.current) return;
 
-    const { clampedX, clampedY } = getRelativePosition(
+    const { snappedX, snappedY } = getRelativePosition(
       x,
       y,
       containerRef.current,
+      10,
       offsetY,
     );
 
     setIsMoving(false);
 
     if (setUrl) {
-      setUrl(new NextURL(`localhost:3000/salen/${clampedX}${clampedY}`));
+      setUrl(
+        new NextURL(
+          `${window.location.href}salen/Y${snappedY}X${snappedX}.png`,
+        ),
+      );
     }
   }
 
@@ -65,6 +76,7 @@ export default function Map({ setUrl, offsetY = 60 }: Props) {
       x,
       y,
       containerRef.current,
+      10,
       offsetY,
     );
 
