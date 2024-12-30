@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate": "node ./lib/generate.mjs"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.4",
@@ -29,6 +30,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.1.3",
     "postcss": "^8",
+    "puppeteer": "^23.11.1",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }

@@ -77,6 +77,7 @@ export default function Map({ setUrl, offsetY = 60 }: Props) {
 
   return (
     <div
+      id="touchzone"
       ref={containerRef}
       className="w-full relative"
       onTouchStart={(e) => {
@@ -99,7 +100,8 @@ export default function Map({ setUrl, offsetY = 60 }: Props) {
       >
         <Image
           className={cn(
-            "select-none pointer-events-none touch-none w-10 h-10 fixed -translate-x-[50%] -translate-y-[115%] transition-transform",
+            "select-none pointer-events-none touch-none w-10 h-10 fixed -translate-x-[50%] -translate-y-[115%] ",
+            !navigator.webdriver && "transition-transform",
             !current && "-translate-y-[4000%]",
             isMoving && "-translate-y-[150%]",
           )}
