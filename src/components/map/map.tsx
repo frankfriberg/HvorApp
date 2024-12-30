@@ -5,7 +5,6 @@ import { useRef, useState } from "react";
 import pinIcon from "../../../public/pin.svg";
 import map from "../../../public/salen.png";
 import { cn } from "@/lib/utils";
-import ShareMenu from "./share";
 import { NextURL } from "next/dist/server/web/next-url";
 
 type Position = {
@@ -25,10 +24,13 @@ function getRelativePosition(x: number, y: number, current: HTMLDivElement) {
   return { clampedX, clampedY };
 }
 
-export default function Map() {
+type Props = {
+  setUrl?: (url: NextURL | undefined) => void;
+};
+
+export default function Map({ setUrl }: Props) {
   const [isMoving, setIsMoving] = useState(false);
   const [current, setCurrent] = useState<Position | undefined>();
-  const [url, setUrl] = useState<NextURL | undefined>();
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -42,7 +44,10 @@ export default function Map() {
     );
 
     setIsMoving(false);
-    setUrl(new NextURL(`localhost:3000/salen/${clampedX}${clampedY}`));
+
+    if (setUrl) {
+      setUrl(new NextURL(`localhost:3000/salen/${clampedX}${clampedY}`));
+    }
   }
 
   function onMove(x: number, y: number) {
@@ -54,58 +59,58 @@ export default function Map() {
       containerRef.current,
     );
 
-    setUrl(undefined);
     setCurrent({ x: clampedX, y: clampedY });
+
+    if (setUrl) {
+      setUrl(undefined);
+    }
   }
 
   return (
-    <div className="px-10 touch-none select-none overflow-hidden">
+    <div
+      ref={containerRef}
+      className="w-full relative"
+      onTouchStart={(e) => {
+        setIsMoving(true);
+        onMove(e.changedTouches[0].pageX, e.changedTouches[0].pageY);
+      }}
+      onTouchEnd={(e) =>
+        onEnd(e.changedTouches[0].pageX, e.changedTouches[0].pageY)
+      }
+      onTouchMove={(e) =>
+        onMove(e.changedTouches[0].pageX, e.changedTouches[0].pageY)
+      }
+    >
       <div
-        ref={containerRef}
-        className="w-full relative"
-        onTouchStart={(e) => {
-          setIsMoving(true);
-          onMove(e.changedTouches[0].pageX, e.changedTouches[0].pageY);
+        className="absolute w-1 select-none"
+        style={{
+          top: current?.y,
+          left: current?.x,
         }}
-        onTouchEnd={(e) =>
-          onEnd(e.changedTouches[0].pageX, e.changedTouches[0].pageY)
-        }
-        onTouchMove={(e) =>
-          onMove(e.changedTouches[0].pageX, e.changedTouches[0].pageY)
-        }
       >
-        <div
-          className="absolute w-1 select-none"
-          style={{
-            top: current?.y,
-            left: current?.x,
-          }}
-        >
-          <Image
-            className={cn(
-              "select-none pointer-events-none touch-none w-10 h-10 fixed -translate-x-[50%] -translate-y-[115%] transition-transform",
-              !current && "-translate-y-[4000%]",
-              isMoving && "-translate-y-[150%]",
-            )}
-            src={pinIcon}
-            alt=""
-          />
-          <div
-            className={cn(
-              "w-1.5 h-1.5 bg-[#E45F53] rounded-full -translate-x-[50%] -translate-y-[50%]",
-              !current && "hidden",
-            )}
-          />
-        </div>
         <Image
-          src={map}
+          className={cn(
+            "select-none pointer-events-none touch-none w-10 h-10 fixed -translate-x-[50%] -translate-y-[115%] transition-transform",
+            !current && "-translate-y-[4000%]",
+            isMoving && "-translate-y-[150%]",
+          )}
+          src={pinIcon}
           alt=""
-          width={868}
-          height={1593}
-          className="pointer-events-none select-none touch-none"
+        />
+        <div
+          className={cn(
+            "w-1.5 h-1.5 bg-[#E45F53] rounded-full -translate-x-[50%] -translate-y-[50%]",
+            !current && "hidden",
+          )}
         />
       </div>
-      <ShareMenu url={url} />
+      <Image
+        src={map}
+        alt=""
+        width={868}
+        height={1593}
+        className="pointer-events-none select-none touch-none"
+      />
     </div>
   );
 }

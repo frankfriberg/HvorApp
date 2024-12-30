@@ -1,5 +1,5 @@
 import { Menu } from "@/components/home/menu";
-import Map from "@/components/map/map";
+import ShareMap from "@/components/map/shareMap";
 
 export default function Home() {
   return (
@@ -8,7 +8,8 @@ export default function Home() {
         Logo
         <Menu />
       </div>
-      <Map />
+
+      <ShareMap />
     </div>
   );
 }
