@@ -10,20 +10,26 @@ type ShareMenuProps = {
 };
 
 export default function ShareMenu({ url }: ShareMenuProps) {
+  const handleShare = () => {
+    if (typeof navigator !== "undefined" && navigator.share) {
+      navigator
+        .share({
+          title: "Her sitter jeg!",
+          url: url?.href,
+        })
+        .catch(() => null);
+    } else {
+      console.warn("Web Share API is not supported in this environment.");
+    }
+  };
+
   return (
     <Button
       className={cn(
         "rounded-full size-20 absolute bottom-[10vw] -right-[25vw] transition-[right]",
         url && "right-[10vw]",
       )}
-      onClick={() =>
-        navigator
-          .share({
-            title: "Her sitter jeg!",
-            url: url?.href,
-          })
-          .catch(() => null)
-      }
+      onClick={handleShare}
     >
       <ShareIcon className="!size-7" />
     </Button>

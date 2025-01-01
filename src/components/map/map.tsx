@@ -6,7 +6,6 @@ import pinIcon from "../../../public/pin.svg";
 import map from "../../../public/salen.png";
 import { cn } from "@/lib/utils";
 import { NextURL } from "next/dist/server/web/next-url";
-import { usePathname, useRouter } from "next/navigation";
 
 type Position = {
   x: number;
@@ -87,6 +86,14 @@ export default function Map({ setUrl, offsetY = 60 }: Props) {
     }
   }
 
+  const isWebdriver = () => {
+    if (typeof navigator !== "undefined" && navigator.webdriver) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <div
       id="touchzone"
@@ -104,16 +111,17 @@ export default function Map({ setUrl, offsetY = 60 }: Props) {
       }
     >
       <div
-        className="absolute w-1 select-none"
+        className="absolute w-[10vw] select-none"
         style={{
           top: current?.y,
           left: current?.x,
         }}
       >
         <Image
+          priority
           className={cn(
-            "select-none pointer-events-none touch-none w-10 h-10 fixed -translate-x-[50%] -translate-y-[115%] ",
-            !navigator.webdriver && "transition-transform",
+            "select-none pointer-events-none touch-none absolute -translate-x-[50%] -translate-y-[115%]",
+            !isWebdriver() && "transition-transform",
             !current && "-translate-y-[4000%]",
             isMoving && "-translate-y-[150%]",
           )}
@@ -122,7 +130,7 @@ export default function Map({ setUrl, offsetY = 60 }: Props) {
         />
         <div
           className={cn(
-            "w-1.5 h-1.5 bg-[#E45F53] rounded-full -translate-x-[50%] -translate-y-[50%]",
+            "w-[1.5vw] h-[1.5vw] bg-[#E45F53] rounded-full -translate-x-[50%] -translate-y-[50%]",
             !current && "hidden",
           )}
         />
