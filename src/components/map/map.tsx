@@ -6,6 +6,7 @@ import pinIcon from "../../../public/pin.svg";
 import map from "../../../public/salen.png";
 import { cn } from "@/lib/utils";
 import { NextURL } from "next/dist/server/web/next-url";
+import { gridSize } from "@/lib/constants";
 
 type Position = {
   x: number;
@@ -16,7 +17,6 @@ function getRelativePosition(
   x: number,
   y: number,
   current: HTMLDivElement,
-  gridSize: number,
   offsetY?: number,
 ) {
   const { left, top, width, height } = current.getBoundingClientRect();
@@ -53,7 +53,6 @@ export default function Map({ setUrl, offsetY = 60 }: Props) {
       x,
       y,
       containerRef.current,
-      10,
       offsetY,
     );
 
@@ -75,7 +74,6 @@ export default function Map({ setUrl, offsetY = 60 }: Props) {
       x,
       y,
       containerRef.current,
-      10,
       offsetY,
     );
 
