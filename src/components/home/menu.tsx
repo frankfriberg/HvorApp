@@ -2,7 +2,9 @@
 
 import * as React from "react";
 import Link, { LinkProps } from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import vipps from "../../../public/vipps.svg";
+import mobilepay from "../../../public/mobilepay.svg";
 
 import { cn } from "@/lib/utils";
 import {
@@ -12,6 +14,7 @@ import {
   DrawerTrigger,
 } from "../ui/drawer";
 import { Button } from "../ui/button";
+import Image from "next/image";
 
 export function Menu() {
   const [open, setOpen] = React.useState(false);
@@ -22,10 +25,13 @@ export function Menu() {
 
   const links = [
     {
-      title: "Home",
+      title: "Kart",
       href: "/",
     },
   ];
+
+  const vippsUrl = process.env.NEXT_PUBLIC_VIPPS_URL;
+  const mobilepayUrl = process.env.NEXT_PUBLIC_MOBILEPAY_URL;
 
   return (
     <Drawer open={open} onOpenChange={onOpenChange}>
@@ -51,21 +57,44 @@ export function Menu() {
           <span className="sr-only">Toggle Menu</span>
         </Button>
       </DrawerTrigger>
-      <DrawerContent className="min-h-[60svh]">
-        <div className="flex flex-col space-y-3 p-6 text-center">
-          <DrawerTitle>Menu</DrawerTitle>
-          {links.map(
-            (item) =>
-              item.href && (
-                <MobileLink
-                  key={item.href}
-                  href={item.href}
-                  onOpenChange={setOpen}
-                >
-                  {item.title}
-                </MobileLink>
-              ),
-          )}
+      <DrawerContent className="min-h-[60svh] text-center">
+        <div className="flex flex-col grow justify-between p-6 gap-3">
+          <div className="flex flex-col gap-6">
+            <DrawerTitle className="text-xs">MENY</DrawerTitle>
+            {links.map(
+              (item) =>
+                item.href && (
+                  <MobileLink
+                    key={item.href}
+                    href={item.href}
+                    onOpenChange={setOpen}
+                  >
+                    {item.title}
+                  </MobileLink>
+                ),
+            )}
+          </div>
+          <div className="flex gap-3 flex-col">
+            <p className="font-bold">Støtt oss via</p>
+            {vippsUrl && (
+              <Link href={vippsUrl}>
+                <Image
+                  src={vipps}
+                  alt="Støtt oss via Vipps"
+                  className="m-auto w-8/12"
+                />
+              </Link>
+            )}
+            {mobilepayUrl && (
+              <Link href={mobilepayUrl}>
+                <Image
+                  src={mobilepay}
+                  alt="Støtt oss via MobilePay"
+                  className="m-auto w-8/12"
+                />
+              </Link>
+            )}
+          </div>
         </div>
       </DrawerContent>
     </Drawer>
@@ -86,6 +115,9 @@ function MobileLink({
   ...props
 }: MobileLinkProps) {
   const router = useRouter();
+  const pathname = usePathname();
+  const active = pathname === href;
+
   return (
     <Link
       href={href}
@@ -93,7 +125,7 @@ function MobileLink({
         router.push(href.toString());
         onOpenChange?.(false);
       }}
-      className={cn("text-base", className)}
+      className={cn("text-3xl", active && "font-bold", className)}
       {...props}
     >
       {children}
