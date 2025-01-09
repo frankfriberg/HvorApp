@@ -2,10 +2,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { SubmitButton } from "@/components/ui/submitButton";
 import { Textarea } from "@/components/ui/textarea";
+import { createClient } from "../../../utils/supabase";
 
 export default function FeedbackPage() {
   async function sendFeedback(formData: FormData) {
     "use server";
+
+    const supabase = await createClient();
 
     const rawFormData = {
       name: formData.get("name"),
@@ -13,7 +16,9 @@ export default function FeedbackPage() {
       content: formData.get("content"),
     };
 
-    // Mutate data
+    const { error } = await supabase.from("feedback").insert([rawFormData]);
+
+    if (error) throw new Error(error.message);
   }
 
   return (
