@@ -28,6 +28,10 @@ export function Menu() {
       title: "Kart",
       href: "/",
     },
+    {
+      title: "Tilbakemelding",
+      href: "/feedback",
+    },
   ];
 
   const vippsUrl = process.env.NEXT_PUBLIC_VIPPS_URL;
