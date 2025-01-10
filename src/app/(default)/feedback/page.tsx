@@ -2,7 +2,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { SubmitButton } from "@/components/ui/submitButton";
 import { Textarea } from "@/components/ui/textarea";
-import { createClient } from "../../../utils/supabase";
+import { createClient } from "../../../../utils/supabase";
 
 export default function FeedbackPage() {
   async function sendFeedback(formData: FormData) {
