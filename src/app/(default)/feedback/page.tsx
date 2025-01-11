@@ -1,9 +1,11 @@
 "use client";
 import { sendFeedback } from "@/actions/feedback";
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { SubmitButton } from "@/components/ui/submitButton";
 import { Textarea } from "@/components/ui/textarea";
+import { AlertCircle, CheckCircle2 } from "lucide-react";
 import { useActionState } from "react";
 
 export default function FeedbackPage() {
@@ -45,8 +47,20 @@ export default function FeedbackPage() {
             defaultValue={state.input?.content}
           />
         </Label>
-        {state.message && <p>{state.message}</p>}
-        {state.error && <p>{state.message}</p>}
+        {state.message && (
+          <Alert>
+            <CheckCircle2 className="h-4 w-4" />
+            <AlertTitle>Motatt</AlertTitle>
+            <AlertDescription>{state.message}</AlertDescription>
+          </Alert>
+        )}
+        {state.error && (
+          <Alert variant="destructive">
+            <AlertCircle className="h-4 w-4" />
+            <AlertTitle>Error!</AlertTitle>
+            <AlertDescription>{state.error}</AlertDescription>
+          </Alert>
+        )}
         <SubmitButton disabled={!!state.message}>Send</SubmitButton>
       </form>
     </div>
