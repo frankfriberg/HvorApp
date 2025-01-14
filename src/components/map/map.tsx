@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useRef, useState } from "react";
-import map from "../../../public/salen.png";
 import pinIcon from "@public/pin.svg";
 import { cn } from "@/lib/utils";
 import { NextURL } from "next/dist/server/web/next-url";
@@ -36,11 +35,13 @@ function getRelativePosition(
   return { clampedX, clampedY, snappedX, snappedY };
 }
 type Props = {
+  map: string;
+  arena?: string;
   offsetY?: number;
   setUrl?: (url: NextURL | undefined) => void;
 };
 
-export default function Map({ setUrl, offsetY = 60 }: Props) {
+export default function Map({ arena, map, setUrl, offsetY = 60 }: Props) {
   const [isMoving, setIsMoving] = useState(false);
   const [current, setCurrent] = useState<Position | undefined>();
 
@@ -61,7 +62,7 @@ export default function Map({ setUrl, offsetY = 60 }: Props) {
     if (setUrl) {
       setUrl(
         new NextURL(
-          `${window.location.href}salen/Y${snappedY}X${snappedX}.png`,
+          `${window.location.href}${arena}/Y${snappedY}X${snappedX}.png`,
         ),
       );
     }
