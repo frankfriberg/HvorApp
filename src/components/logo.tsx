@@ -1,5 +1,5 @@
 import Image from "next/image";
-import logo from "../../public/logo.svg";
+import logo from "@public/logo.svg";
 import { ComponentProps } from "react";
 import { cn } from "@/lib/utils";
 

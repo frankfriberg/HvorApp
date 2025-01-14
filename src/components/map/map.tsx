@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import { useRef, useState } from "react";
-import pinIcon from "../../../public/pin.svg";
 import map from "../../../public/salen.png";
+import pinIcon from "@public/pin.svg";
 import { cn } from "@/lib/utils";
 import { NextURL } from "next/dist/server/web/next-url";
 import { gridSize } from "@/lib/constants";

@@ -3,8 +3,8 @@
 import * as React from "react";
 import Link, { LinkProps } from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import vipps from "../../../public/vipps.svg";
-import mobilepay from "../../../public/mobilepay.svg";
+import vipps from "@public/vipps.svg";
+import mobilepay from "@public/mobilepay.svg";
 
 import { cn } from "@/lib/utils";
 import {
