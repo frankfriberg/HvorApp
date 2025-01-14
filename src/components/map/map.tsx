@@ -34,18 +34,20 @@ function getRelativePosition(
 
   return { clampedX, clampedY, snappedX, snappedY };
 }
+
 type Props = {
   map: string;
   arena?: string;
-  offsetY?: number;
+  generate?: boolean;
   setUrl?: (url: NextURL | undefined) => void;
 };
 
-export default function Map({ arena, map, setUrl, offsetY = 60 }: Props) {
+export default function Map({ arena, map, setUrl, generate }: Props) {
   const [isMoving, setIsMoving] = useState(false);
   const [current, setCurrent] = useState<Position | undefined>();
 
   const containerRef = useRef<HTMLDivElement>(null);
+  const offsetY = generate ? 0 : 60;
 
   function onEnd(x: number, y: number) {
     if (!containerRef.current) return;
@@ -85,14 +87,6 @@ export default function Map({ arena, map, setUrl, offsetY = 60 }: Props) {
     }
   }
 
-  const isWebdriver = () => {
-    if (typeof navigator !== "undefined" && navigator.webdriver) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
   return (
     <div
       id="touchzone"
@@ -120,9 +114,9 @@ export default function Map({ arena, map, setUrl, offsetY = 60 }: Props) {
           priority
           className={cn(
             "select-none pointer-events-none touch-none absolute -translate-x-[50%] -translate-y-[115%]",
-            !isWebdriver() && "transition-transform",
             !current && "-translate-y-[4000%]",
-            isMoving && "-translate-y-[150%]",
+            !generate && "transition-transform",
+            !generate && isMoving && "-translate-y-[150%]",
           )}
           src={pinIcon}
           alt=""
