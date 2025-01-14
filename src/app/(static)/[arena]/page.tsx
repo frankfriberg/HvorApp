@@ -5,14 +5,13 @@ import { list } from "@vercel/blob";
 export default async function GeneratePage({
   params,
 }: {
-  params: { arena: string };
+  params: Promise<{ arena: string }>;
 }) {
+  const { arena } = await params;
   const { blobs } = await list({ prefix: "maps" });
-  const map = blobs.find((blob) =>
-    blob.pathname.startsWith(`maps/${params.arena}`),
-  );
+  const map = blobs.find((blob) => blob.pathname.startsWith(`maps/${arena}`));
 
-  if (!map) throw new Error(`No map found for "${params.arena}"`);
+  if (!map) throw new Error(`No map found for "${arena}"`);
 
   return (
     <div className="px-10 touch-none select-none">
