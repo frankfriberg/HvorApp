@@ -62,7 +62,7 @@ export function Menu() {
         </Button>
       </DrawerTrigger>
       <DrawerContent className="min-h-[60svh] text-center">
-        <div className="flex flex-col grow justify-between p-6 gap-3">
+        <div className="flex grow flex-col justify-between gap-3 p-6">
           <div className="flex flex-col gap-6">
             <DrawerTitle className="text-xs">MENY</DrawerTitle>
             {links.map(
@@ -78,7 +78,7 @@ export function Menu() {
                 ),
             )}
           </div>
-          <div className="flex gap-3 flex-col">
+          <div className="flex flex-col gap-3">
             <p className="font-bold">Støtt oss via</p>
             {vippsUrl && (
               <Link href={vippsUrl}>

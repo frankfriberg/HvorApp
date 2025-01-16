@@ -14,7 +14,7 @@ export default function ShareMap(props: Props) {
   const [url, setUrl] = useState<NextURL | undefined>();
 
   return (
-    <div className="px-10 touch-none select-none">
+    <div className="touch-none select-none px-10">
       <Map setUrl={setUrl} {...props} />
       <ShareMenu url={url} />
     </div>

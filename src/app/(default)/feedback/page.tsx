@@ -13,12 +13,12 @@ export default function FeedbackPage() {
 
   return (
     <div className="flex flex-col gap-3 px-6 py-3">
-      <h1 className="text-2xl font-bold mb-3">Gi din tilbakemelding</h1>
+      <h1 className="mb-3 text-2xl font-bold">Gi din tilbakemelding</h1>
       <p>
         Hvis du har funnet en feil, eller om det er noe du vil skal være
         annerledes, eller har du en god ide til appen.
       </p>
-      <form className="flex flex-col my-3 space-y-4" action={formAction}>
+      <form className="my-3 flex flex-col space-y-4" action={formAction}>
         <Label htmlFor="name">
           Navn
           <Input

@@ -14,7 +14,7 @@ export default async function GeneratePage({
   if (!map) throw new Error(`No map found for "${arena}"`);
 
   return (
-    <div className="px-10 touch-none select-none">
+    <div className="touch-none select-none px-10">
       <Logo className="mx-auto my-6" />
       <Map map={map.downloadUrl} generate />
     </div>

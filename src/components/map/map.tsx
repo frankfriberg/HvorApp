@@ -91,7 +91,7 @@ export default function Map({ arena, map, setUrl, generate }: Props) {
     <div
       id="touchzone"
       ref={containerRef}
-      className="w-full relative"
+      className="relative w-full"
       onTouchStart={(e) => {
         setIsMoving(true);
         onMove(e.changedTouches[0].pageX, e.changedTouches[0].pageY);
@@ -113,7 +113,7 @@ export default function Map({ arena, map, setUrl, generate }: Props) {
         <Image
           priority
           className={cn(
-            "select-none pointer-events-none touch-none absolute -translate-x-[50%] -translate-y-[115%]",
+            "pointer-events-none absolute -translate-x-[50%] -translate-y-[115%] touch-none select-none",
             !current && "-translate-y-[4000%]",
             !generate && "transition-transform",
             !generate && isMoving && "-translate-y-[150%]",
@@ -123,7 +123,7 @@ export default function Map({ arena, map, setUrl, generate }: Props) {
         />
         <div
           className={cn(
-            "w-[1.5vw] h-[1.5vw] bg-[#E45F53] rounded-full -translate-x-[50%] -translate-y-[50%]",
+            "h-[1.5vw] w-[1.5vw] -translate-x-[50%] -translate-y-[50%] rounded-full bg-[#E45F53]",
             !current && "hidden",
           )}
         />
@@ -134,7 +134,7 @@ export default function Map({ arena, map, setUrl, generate }: Props) {
         alt=""
         width={868}
         height={1593}
-        className="pointer-events-none select-none touch-none"
+        className="pointer-events-none touch-none select-none"
       />
     </div>
   );

@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
-        <div className="flex justify-between p-6 items-center">
+        <div className="flex items-center justify-between p-6">
           <Logo />
           <Menu />
         </div>
