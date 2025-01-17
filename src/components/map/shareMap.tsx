@@ -1,9 +1,9 @@
 "use client";
 
-import type { NextURL } from "next/dist/server/web/next-url";
+import { NextURL } from "next/dist/server/web/next-url";
 import { useState } from "react";
 import ShareMenu from "./shareMenu";
-import Map from "./map";
+import TouchMap from "./touchMap";
 
 type Props = {
   arena: string;
@@ -15,7 +15,7 @@ export default function ShareMap(props: Props) {
 
   return (
     <div className="touch-none select-none px-10">
-      <Map setUrl={setUrl} {...props} />
+      <TouchMap setUrl={setUrl} {...props} />
       <ShareMenu url={url} />
     </div>
   );

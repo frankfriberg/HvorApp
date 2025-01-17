@@ -42,7 +42,7 @@ type Props = {
   setUrl?: (url: NextURL | undefined) => void;
 };
 
-export default function Map({ arena, map, setUrl, generate }: Props) {
+export default function TouchMap({ arena, map, setUrl, generate }: Props) {
   const [isMoving, setIsMoving] = useState(false);
   const [current, setCurrent] = useState<Position | undefined>();
 

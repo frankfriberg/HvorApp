@@ -1,5 +1,5 @@
 import Logo from "@/components/logo";
-import Map from "@/components/map/map";
+import TouchMap from "@/components/map/touchMap";
 import { list } from "@vercel/blob";
 
 export default async function GeneratePage({
@@ -16,7 +16,7 @@ export default async function GeneratePage({
   return (
     <div className="touch-none select-none px-10">
       <Logo className="mx-auto my-6" />
-      <Map map={map.downloadUrl} generate />
+      <TouchMap map={map.downloadUrl} generate />
     </div>
   );
 }
