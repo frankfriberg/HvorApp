@@ -1,6 +1,6 @@
 "use client";
 
-import { NextURL } from "next/dist/server/web/next-url";
+import type { NextURL } from "next/dist/server/web/next-url";
 import { useState } from "react";
 import ShareMenu from "./shareMenu";
 import Map from "./map";

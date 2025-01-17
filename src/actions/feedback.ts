@@ -1,7 +1,7 @@
 "use server";
 
 import { createClient } from "@/lib/supabase";
-import { SendFeedbackActionState } from "@/types/feedback";
+import type { SendFeedbackActionState } from "@/types/feedback";
 
 export async function sendFeedback(
   _prevState: SendFeedbackActionState | null,

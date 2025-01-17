@@ -1,5 +1,5 @@
 import { list } from "@vercel/blob";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 type Props = {
   params: Promise<{ location: string }>;

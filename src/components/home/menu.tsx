@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import Link, { LinkProps } from "next/link";
+import Link, { type LinkProps } from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import vipps from "@public/vipps.svg";
 import mobilepay from "@public/mobilepay.svg";

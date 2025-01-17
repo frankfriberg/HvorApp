@@ -3,7 +3,7 @@
 import { ShareIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
-import { NextURL } from "next/dist/server/web/next-url";
+import type { NextURL } from "next/dist/server/web/next-url";
 
 type ShareMenuProps = {
   url?: NextURL;

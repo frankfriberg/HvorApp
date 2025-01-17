@@ -1,6 +1,6 @@
 import Image from "next/image";
 import logo from "@public/logo.svg";
-import { ComponentProps } from "react";
+import type { ComponentProps } from "react";
 import { cn } from "@/lib/utils";
 
 export default function Logo(
