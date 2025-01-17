@@ -52,6 +52,7 @@ export function Menu() {
             stroke="currentColor"
             className="!size-6"
           >
+            <title>two stripes</title>
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
