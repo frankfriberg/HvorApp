@@ -1,7 +1,7 @@
-import Image from "next/image";
-import logo from "@public/logo.svg";
-import type { ComponentProps } from "react";
 import { cn } from "@/lib/utils";
+import logo from "@public/logo.svg";
+import Image from "next/image";
+import type { ComponentProps } from "react";
 
 export default function Logo(
   props: Omit<ComponentProps<typeof Image>, "alt" | "src">,

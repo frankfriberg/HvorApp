@@ -1,9 +1,9 @@
 "use client";
 
-import { ShareIcon } from "lucide-react";
-import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
+import { ShareIcon } from "lucide-react";
 import type { NextURL } from "next/dist/server/web/next-url";
+import { Button } from "../ui/button";
 
 type ShareMenuProps = {
   url?: NextURL;

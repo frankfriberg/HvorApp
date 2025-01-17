@@ -1,8 +1,8 @@
 "use client";
 
+import type { ComponentProps, PropsWithChildren } from "react";
 import { useFormStatus } from "react-dom";
 import { Button } from "./button";
-import type { ComponentProps, PropsWithChildren } from "react";
 
 export function SubmitButton(
   props: PropsWithChildren<ComponentProps<typeof Button>>,

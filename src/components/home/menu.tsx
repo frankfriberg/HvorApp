@@ -1,20 +1,20 @@
 "use client";
 
-import * as React from "react";
+import mobilepay from "@public/mobilepay.svg";
+import vipps from "@public/vipps.svg";
 import Link, { type LinkProps } from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import vipps from "@public/vipps.svg";
-import mobilepay from "@public/mobilepay.svg";
+import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import Image from "next/image";
+import { Button } from "../ui/button";
 import {
   Drawer,
   DrawerContent,
   DrawerTitle,
   DrawerTrigger,
 } from "../ui/drawer";
-import { Button } from "../ui/button";
-import Image from "next/image";
 
 export function Menu() {
   const [open, setOpen] = React.useState(false);
