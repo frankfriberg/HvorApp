@@ -1,4 +1,3 @@
-import Logo from "@/components/logo";
 import TouchMap from "@/components/map/touchMap";
 import { list } from "@vercel/blob";
 
@@ -14,8 +13,7 @@ export default async function GeneratePage({
   if (!map) throw new Error(`No map found for "${arena}"`);
 
   return (
-    <div className="touch-none select-none px-10">
-      <Logo className="mx-auto my-6" />
+    <div className="touch-none select-none px-10 pt-20">
       <TouchMap map={map.downloadUrl} generate />
     </div>
   );
