@@ -50,5 +50,7 @@ export default async function LocationPage({ params }: Props) {
 
   if (!match) return null;
 
-  return <Image src={match.url} alt={match.pathname} />;
+  return (
+    <Image src={match.url} alt={match.pathname} width={563} height={1001} />
+  );
 }
