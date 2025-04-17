@@ -42,3 +42,4 @@ next-env.d.ts
 
 # generated images
 /public/salen
+.env*.local
