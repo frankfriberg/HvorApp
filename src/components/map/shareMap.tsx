@@ -3,11 +3,12 @@
 import type { NextURL } from "next/dist/server/web/next-url";
 import { useState } from "react";
 import ShareMenu from "./shareMenu";
-import TouchMap from "./touchMap";
+import TouchMap, { type Position } from "./touchMap";
 
 type Props = {
   arena: string;
   map: string;
+  points?: Position;
 };
 
 export default function ShareMap(props: Props) {

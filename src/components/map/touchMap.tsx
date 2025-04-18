@@ -7,7 +7,7 @@ import { NextURL } from "next/dist/server/web/next-url";
 import Image from "next/image";
 import { useRef, useState } from "react";
 
-type Position = {
+export type Position = {
   x: number;
   y: number;
 };
@@ -40,11 +40,18 @@ type Props = {
   arena?: string;
   generate?: boolean;
   setUrl?: (url: NextURL | undefined) => void;
+  points?: Position;
 };
 
-export default function TouchMap({ arena, map, setUrl, generate }: Props) {
+export default function TouchMap({
+  arena,
+  map,
+  setUrl,
+  generate,
+  points,
+}: Props) {
   const [isMoving, setIsMoving] = useState(false);
-  const [current, setCurrent] = useState<Position | undefined>();
+  const [current, setCurrent] = useState<Position | undefined>(points);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const offsetY = generate ? 0 : 60;
