@@ -1,20 +1,10 @@
 import TouchMap from "@/components/map/touchMap";
-import { list } from "@vercel/blob";
+import Salen from "@public/arena/salen.svg";
 
-export default async function GeneratePage({
-  params,
-}: {
-  params: Promise<{ arena: string }>;
-}) {
-  const { arena } = await params;
-  const { blobs } = await list({ prefix: "maps" });
-  const map = blobs.find((blob) => blob.pathname.startsWith(`maps/${arena}`));
-
-  if (!map) throw new Error(`No map found for "${arena}"`);
-
+export default async function GeneratePage() {
   return (
     <div className="touch-none select-none px-10 pt-20">
-      <TouchMap map={map.downloadUrl} generate />
+      <TouchMap map={Salen} generate />
     </div>
   );
 }

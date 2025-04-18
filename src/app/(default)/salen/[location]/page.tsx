@@ -1,5 +1,6 @@
 import ShareMap from "@/components/map/shareMap";
 import type { Position } from "@/components/map/touchMap";
+import Salen from "@public/arena/salen.svg";
 import { list } from "@vercel/blob";
 import type { Metadata } from "next";
 
@@ -51,13 +52,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function LocationPage({ params }: Props) {
   const { location } = await params;
-  const arena = "salen";
-
-  const map = `https://${process.env.BLOB_URL}/maps/${arena}.svg`;
 
   const points = extractCoordinates(location);
 
   if (!points) return null;
 
-  return <ShareMap arena="salen" map={map} points={points} />;
+  return <ShareMap arena="salen" map={Salen} points={points} />;
 }

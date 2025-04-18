@@ -1,8 +1,6 @@
 import ShareMap from "@/components/map/shareMap";
-import { list } from "@vercel/blob";
+import Salen from "@public/arena/salen.svg";
 
 export default async function Home() {
-  const map = `https://${process.env.BLOB_URL}/maps/salen.svg`;
-
-  return <ShareMap arena="salen" map={map} />;
+  return <ShareMap arena="salen" map={Salen} />;
 }
