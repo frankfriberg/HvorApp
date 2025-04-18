@@ -6,7 +6,7 @@ import ShareMenu from "./shareMenu";
 import TouchMap, { type Position } from "./touchMap";
 
 type Props = {
-  arena: string;
+  arena: "salen";
   map: string;
   points?: Position;
 };
