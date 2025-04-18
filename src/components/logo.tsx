@@ -8,6 +8,7 @@ export default function Logo(
 ) {
   return (
     <Image
+      priority
       src={logo}
       alt="Hvor logo"
       {...props}

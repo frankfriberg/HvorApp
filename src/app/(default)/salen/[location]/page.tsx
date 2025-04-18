@@ -1,7 +1,7 @@
+import { readdir } from "node:fs/promises";
 import ShareMap from "@/components/map/shareMap";
 import type { Position } from "@/components/map/touchMap";
 import Salen from "@public/arena/salen.svg";
-import { list } from "@vercel/blob";
 import type { Metadata } from "next";
 
 function extractCoordinates(input: string): Position | null {
@@ -21,15 +21,12 @@ type Props = {
   params: Promise<{ location: string }>;
 };
 
-const locations = await list({ prefix: "salen" });
-
 export async function generateStaticParams() {
-  const filteredLocations = locations.blobs.filter(({ size }) => size > 0);
-  const locationsMap = filteredLocations.map(({ pathname }) => {
-    const segment = pathname.split("/")[1];
-    const locationName = segment.includes(".")
-      ? segment.substring(0, segment.lastIndexOf("."))
-      : segment;
+  const files = await readdir("./public/salen");
+  const locationsMap = files.map((file) => {
+    const locationName = file.includes(".")
+      ? file.substring(0, file.lastIndexOf("."))
+      : file;
 
     return {
       location: locationName,
