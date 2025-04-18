@@ -2,7 +2,6 @@ import ShareMap from "@/components/map/shareMap";
 import type { Position } from "@/components/map/touchMap";
 import { list } from "@vercel/blob";
 import type { Metadata } from "next";
-import Image from "next/image";
 
 function extractCoordinates(input: string): Position | null {
   const regex = /^Y(\d+)X(\d+)$/;
@@ -42,16 +41,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { location } = await params;
 
-  const match = locations.blobs.find(({ pathname }) =>
-    pathname.includes(location),
-  );
-
-  if (!match) return {};
-
   return {
     title: location,
     openGraph: {
-      images: [match.url],
+      images: `https://${process.env.BLOB_URL}/salen/${location}.png`,
     },
   };
 }
@@ -60,14 +53,11 @@ export default async function LocationPage({ params }: Props) {
   const { location } = await params;
   const arena = "salen";
 
-  const { blobs } = await list({ prefix: "maps" });
-  const map = blobs.find((blob) => blob.pathname.startsWith(`maps/${arena}`));
-
-  if (!map) return null;
+  const map = `https://${process.env.BLOB_URL}/maps/${arena}.svg`;
 
   const points = extractCoordinates(location);
 
   if (!points) return null;
 
-  return <ShareMap arena="salen" map={map.downloadUrl} points={points} />;
+  return <ShareMap arena="salen" map={map} points={points} />;
 }
