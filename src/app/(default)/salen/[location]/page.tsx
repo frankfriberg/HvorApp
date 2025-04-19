@@ -22,7 +22,7 @@ type Props = {
 };
 
 export async function generateStaticParams() {
-  const files = await readdir("./public/salen");
+  const files = await readdir("/salen");
   const locationsMap = files.map((file) => {
     const locationName = file.includes(".")
       ? file.substring(0, file.lastIndexOf("."))
