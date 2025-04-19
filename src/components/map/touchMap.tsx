@@ -32,6 +32,13 @@ function getRelativePosition(
   return { clampedX, clampedY, snappedX, snappedY };
 }
 
+function getAbsolutePosition(snappedX: number, snappedY: number) {
+  const absoluteX = snappedX * gridSize;
+  const absoluteY = snappedY * gridSize;
+
+  return { x: absoluteX, y: absoluteY };
+}
+
 type Props = {
   map: string;
   arena?: string;
@@ -48,7 +55,9 @@ export default function TouchMap({
   points,
 }: Props) {
   const [isMoving, setIsMoving] = useState(false);
-  const [current, setCurrent] = useState<Position | undefined>(points);
+  const [current, setCurrent] = useState<Position | undefined>(
+    points ? getAbsolutePosition(points.x, points.y) : undefined,
+  );
 
   const containerRef = useRef<HTMLDivElement>(null);
   const offsetY = generate ? 0 : 60;
