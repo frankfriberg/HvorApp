@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: location,
     openGraph: {
-      images: `https://${process.env.BLOB_URL}/salen/${location}.png`,
+      images: `/salen/${location}.png`,
     },
   };
 }
