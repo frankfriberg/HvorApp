@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import pinIcon from "@public/pin.svg";
 import { NextURL } from "next/dist/server/web/next-url";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 
 export type Position = {
   x: number;
@@ -72,22 +72,25 @@ export default function TouchMap({
     }
   }
 
-  function onMove(x: number, y: number) {
-    if (!containerRef.current) return;
+  const onMove = useCallback(
+    (x: number, y: number) => {
+      if (!containerRef.current) return;
 
-    const { clampedX, clampedY } = getRelativePosition(
-      x,
-      y,
-      containerRef.current,
-      offsetY,
-    );
+      const { clampedX, clampedY } = getRelativePosition(
+        x,
+        y,
+        containerRef.current,
+        offsetY,
+      );
 
-    setCurrent({ x: clampedX, y: clampedY });
+      setCurrent({ x: clampedX, y: clampedY });
 
-    if (setUrl) {
-      setUrl(undefined);
-    }
-  }
+      if (setUrl) {
+        setUrl(undefined);
+      }
+    },
+    [setUrl, offsetY],
+  );
 
   return (
     <div
