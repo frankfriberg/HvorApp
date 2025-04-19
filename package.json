@@ -34,6 +34,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "cloudinary": "^2.6.0",
     "imagemin": "^9.0.0",
     "imagemin-pngquant": "^10.0.0",
     "postcss": "^8",
