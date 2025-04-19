@@ -20,17 +20,14 @@ function getRelativePosition(
 ) {
   const { left, top, width, height } = current.getBoundingClientRect();
 
-  // Calculate relative x and y
   const relativeX = x - left;
   const relativeY = offsetY ? y - offsetY - top : y - top;
 
-  // Clamp x and y to the div boundaries
   const clampedX = Math.min(Math.max(relativeX, 0), width);
   const clampedY = Math.min(Math.max(relativeY, 0), height);
 
-  // Calculate grid indicies
-  const snappedX = Math.floor(clampedX / gridSize);
-  const snappedY = Math.floor(clampedY / gridSize);
+  const snappedX = Math.round(clampedX / gridSize);
+  const snappedY = Math.round(clampedY / gridSize);
 
   return { clampedX, clampedY, snappedX, snappedY };
 }
