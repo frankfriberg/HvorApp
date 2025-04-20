@@ -76,7 +76,9 @@ export default function TouchMap({
 
     if (setUrl) {
       setUrl(
-        new NextURL(`${window.location.href}${arena}/Y${snappedY}X${snappedX}`),
+        new NextURL(
+          `${window.location.origin}/${arena}/Y${snappedY}X${snappedX}`,
+        ),
       );
     }
   }
