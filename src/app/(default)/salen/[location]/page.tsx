@@ -1,4 +1,5 @@
-import { readdir } from "node:fs/promises";
+import { readdirSync } from "node:fs";
+import path from "node:path";
 import ShareMap from "@/components/map/shareMap";
 import type { Position } from "@/components/map/touchMap";
 import Salen from "@public/arena/salen.svg";
@@ -21,8 +22,9 @@ type Props = {
   params: Promise<{ location: string }>;
 };
 
-export async function generateStaticParams() {
-  const files = await readdir("/salen");
+export function generateStaticParams() {
+  const dir = path.resolve(process.cwd(), "salen");
+  const files = readdirSync(dir);
   const locationsMap = files.map((file) => {
     const locationName = file.includes(".")
       ? file.substring(0, file.lastIndexOf("."))
