@@ -26,7 +26,7 @@ export default function ShareMenu({ url }: ShareMenuProps) {
   return (
     <Button
       className={cn(
-        "absolute -right-[25vw] bottom-[10vw] size-20 rounded-full transition-[right]",
+        "fixed -right-[25vw] bottom-[10vw] size-20 rounded-full transition-[right]",
         url && "right-[10vw]",
       )}
       onClick={handleShare}
