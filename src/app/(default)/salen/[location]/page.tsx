@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: location,
     openGraph: {
-      images: `https://res.cloudinary.com/dwmrh6hct/image/upload/v1745048711/salen/${location}.png`,
+      images: `https://res.cloudinary.com/dwmrh6hct/image/upload/v1745048711/hvorapp/salen/${location}.png`,
     },
   };
 }
