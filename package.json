@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "biome lint --write",
     "format": "biome format --write",
-    "generate": "node ./lib/generate.mjs"
+    "generate": "node --env-file .env.local ./lib/generate.mjs"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.4",
