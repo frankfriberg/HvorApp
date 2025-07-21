@@ -1,1 +1,1 @@
-export const gridSize = 15;
+export const gridSize = 10;
