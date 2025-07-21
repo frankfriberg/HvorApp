@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import pinIcon from "@public/pin.svg";
 import { NextURL } from "next/dist/server/web/next-url";
 import Image from "next/image";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 export type Position = {
   x: number;
@@ -29,14 +29,27 @@ function getRelativePosition(
   const snappedX = Math.round(clampedX / gridSize);
   const snappedY = Math.round(clampedY / gridSize);
 
-  return { clampedX, clampedY, snappedX, snappedY };
+  const clampedXPercentage = clampedX / width;
+  const clampedYPercentage = clampedY / height;
+
+  return {
+    clampedX: clampedXPercentage,
+    clampedY: clampedYPercentage,
+    snappedX,
+    snappedY,
+  };
 }
 
-function getAbsolutePosition(snappedX: number, snappedY: number) {
+function getAbsolutePosition(
+  snappedX: number,
+  snappedY: number,
+  containerWidth: number,
+  containerHeight: number,
+) {
   const absoluteX = snappedX * gridSize;
   const absoluteY = snappedY * gridSize;
 
-  return { x: absoluteX, y: absoluteY };
+  return { x: absoluteX / containerWidth, y: absoluteY / containerHeight };
 }
 
 type Props = {
@@ -55,11 +68,16 @@ export default function TouchMap({
   points,
 }: Props) {
   const [isMoving, setIsMoving] = useState(false);
-  const [current, setCurrent] = useState<Position | undefined>(
-    points ? getAbsolutePosition(points.x, points.y) : undefined,
-  );
+  const [current, setCurrent] = useState<Position | undefined>();
 
   const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (points && containerRef.current) {
+      const { width, height } = containerRef.current.getBoundingClientRect();
+      setCurrent(getAbsolutePosition(points.x, points.y, width, height));
+    }
+  }, [points]);
   const offsetY = generate ? 0 : 60;
 
   function onEnd(x: number, y: number) {
@@ -122,8 +140,8 @@ export default function TouchMap({
       <div
         className="absolute w-[10vw] select-none"
         style={{
-          top: current?.y,
-          left: current?.x,
+          top: `${(current?.y ?? 0) * 100}%`,
+          left: `${(current?.x ?? 0) * 100}%`,
         }}
       >
         <Image
